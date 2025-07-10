@@ -29,11 +29,6 @@ class Cat1_ {
   }
 }
 
-// custom type
-function isDog(pet: Dog1_ | Cat1_): pet is Dog1_ {
-  return (pet as Dog1_).lastName !== undefined;
-}
-
 function getName(animal: Cat1_ | Dog1_) {
   if (animal instanceof Cat1_) {
     console.log("The name is ", animal.firstName);
@@ -44,6 +39,19 @@ function getName(animal: Cat1_ | Dog1_) {
 
 function getName1(animal: Cat1_ | Dog1_) {
   if ("lastName" in animal) {
+    console.log("The name is", animal.firstName + " " + animal.lastName);
+  } else {
+    console.log("The name is ", animal.firstName);
+  }
+}
+
+// custom type
+function isDog(pet: Dog1_ | Cat1_): pet is Dog1_ {
+  return (pet as Dog1_).lastName !== undefined;
+}
+
+function getName2(animal: Cat1_ | Dog1_) {
+  if (isDog(animal)) {
     console.log("The name is", animal.firstName + " " + animal.lastName);
   } else {
     console.log("The name is ", animal.firstName);
